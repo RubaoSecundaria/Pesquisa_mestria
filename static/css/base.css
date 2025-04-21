@@ -6,6 +6,24 @@ body {
     color: #fff;
 }
 
+
+.footer {
+    text-align: center;
+    margin-top: 40px;
+    color: #063C4A;
+    font-size: 14px;
+}
+
+.footer a {
+    color: #063C4A;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
 .logo-container {
     text-align: center;
     background-color: #ffffff;
@@ -29,7 +47,8 @@ body {
 
 .content-container {
     padding: 15px;
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }

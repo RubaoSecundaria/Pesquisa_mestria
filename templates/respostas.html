@@ -48,7 +48,7 @@
     
     .feedback-answer {
         margin-bottom: 15px;
-        color: #fff;
+        color: #0a2647;;
         padding: 5px 0;
     }
     
@@ -127,24 +127,12 @@
                     </div>
                     
                     <div class="feedback-content">
-                        <p class="feedback-question">1. Como você avalia nosso atendimento?</p>
-                        <p class="feedback-answer">{{ feedback.atendimento }}</p>
+                        <p class="feedback-question">Probabilidade de recomendar a MESTRIA ENGENHARIA DE INCÊNDIO:</p>
+                        <p class="feedback-answer">{{ feedback.recomendacao }} / 10 <span style="margin-left: 10px; padding: 3px 8px; border-radius: 4px; font-size: 0.8em; {% if feedback.recomendacao <= 6 %}background-color: #ff4d6d; color: white;{% elif feedback.recomendacao <= 8 %}background-color: #ffb703; color: black;{% else %}background-color: #06d6a0; color: white;{% endif %}">{{ feedback.get_categoria_nps }}</span></p>
                         
-                        <p class="feedback-question">2. O que você achou do nosso mix de produtos?</p>
-                        <p class="feedback-answer">{{ feedback.mix_produtos }}</p>
-                        
-                        <p class="feedback-question">3. Você considera nosso atendimento ágil?</p>
-                        <p class="feedback-answer">{{ feedback.atendimento_agil }}</p>
-                        
-                        <p class="feedback-question">4. O que você achou dos valores dos nossos produtos?</p>
-                        <p class="feedback-answer">{{ feedback.valores_produtos }}</p>
-                        
-                        <p class="feedback-question">5. O prazo de entrega foi satisfatório?</p>
-                        <p class="feedback-answer">{{ feedback.prazo_entrega }}</p>
-                        
-                        {% if feedback.sugestao_melhoria %}
-                            <p class="feedback-question">6. Sugestão de melhoria:</p>
-                            <p class="feedback-answer">{{ feedback.sugestao_melhoria }}</p>
+                        {% if feedback.comentarios %}
+                            <p class="feedback-question">Comentários, sugestões ou críticas:</p>
+                            <p class="feedback-answer">{{ feedback.comentarios }}</p>
                         {% endif %}
                     </div>
                 </div>

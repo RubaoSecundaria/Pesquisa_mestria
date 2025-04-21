@@ -3,6 +3,170 @@
 {% block extra_css %}
 {% load static %}
 <link href="{% static 'css/style.css' %}" rel="stylesheet">
+<style>
+    html, body {
+        background-color: #ffffff;
+        color: #063C4A;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        box-sizing: border-box;
+        width: 100%;
+    }
+    
+    h1 {
+        text-align: center;
+        color: #063C4A;
+        font-size: 28px;
+        margin-bottom: 30px;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .form-group {
+        background-color: rgba(6, 60, 74, 0.05);
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .form-group:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    }
+    
+    .form-group > label:first-child {
+        display: block;
+        font-weight: bold;
+        font-size: 18px;
+        margin-bottom: 15px;
+        color: #063C4A;
+        border-bottom: 1px solid rgba(6, 60, 74, 0.2);
+        padding-bottom: 10px;
+    }
+    
+    .radio-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 10px;
+    }
+    
+    .radio-option {
+        background-color: rgba(6, 60, 74, 0.05);
+        border-radius: 30px;
+        padding: 8px 15px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        display: flex;
+        align-items: center;
+        border: 1px solid rgba(6, 60, 74, 0.1);
+        color: #063C4A;
+    }
+    
+    .radio-option:hover {
+        background-color: rgba(6, 60, 74, 0.15);
+    }
+    
+    .radio-option input[type="radio"] {
+        margin-right: 8px;
+        accent-color: #063C4A;
+    }
+    
+    input[type="text"], textarea {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid rgba(6, 60, 74, 0.2);
+        background-color: rgba(255,255,255,0.9);
+        color: #063C4A;
+        font-size: 16px;
+        margin-top: 5px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    input[type="text"]:focus, textarea:focus {
+        outline: none;
+        border-color: #063C4A;
+        box-shadow: 0 0 0 2px rgba(6, 60, 74, 0.3);
+    }
+    
+    .btn-submit {
+        background-color: #063C4A;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 30px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        display: block;
+        margin: 30px auto 0;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .btn-submit:hover {
+        background-color: #052a34;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    }
+    
+    .footer {
+        text-align: center;
+        margin-top: 40px;
+        color: #063C4A;
+        font-size: 14px;
+    }
+    
+    .footer a {
+        color: #063C4A;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    
+    .footer a:hover {
+        text-decoration: underline;
+    }
+    
+    .nps-scale {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 15px;
+    }
+    
+    .nps-option {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .nps-option input[type="radio"] {
+        margin-bottom: 5px;
+        accent-color: #063C4A;
+    }
+    
+    .nps-labels {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 5px;
+        font-size: 14px;
+        color: #063C4A;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
@@ -17,58 +181,28 @@
             </div>
             
             <div class="form-group">
-                <label>1. Como você avalia nosso atendimento?</label>
-                <div class="radio-options">
-                    <label class="radio-option"><input type="radio" name="atendimento" value="Excelente" required> Excelente</label>
-                    <label class="radio-option"><input type="radio" name="atendimento" value="Bom"> Bom</label>
-                    <label class="radio-option"><input type="radio" name="atendimento" value="Regular"> Regular</label>
-                    <label class="radio-option"><input type="radio" name="atendimento" value="Ruim"> Ruim</label>
+                <label>Em uma escala de 0 a 10, qual a probabilidade de você recomendar a MESTRIA ENGENHARIA DE INCÊNDIO para amigos ou familiares?</label>
+                <p><small>(Sendo 0 a 6 "Pouco provável", 7 e 8 "Indiferente" e 9 e 10 "Muito Provável")</small></p>
+                
+                <div class="nps-scale">
+                    {% for i in '0123456789X' %}
+                        <div class="nps-option">
+                            <input type="radio" id="nps_{{ i }}" name="recomendacao" value="{% if i == 'X' %}10{% else %}{{ i }}{% endif %}" required>
+                            <label for="nps_{{ i }}">{% if i == 'X' %}10{% else %}{{ i }}{% endif %}</label>
+                        </div>
+                    {% endfor %}
+                </div>
+                
+                <div class="nps-labels">
+                    <span>Pouco provável<br><small>(0 a 6)</small></span>
+                    <span>Indiferente<br><small>(7 e 8)</small></span>
+                    <span>Muito provável<br><small>(9 e 10)</small></span>
                 </div>
             </div>
             
             <div class="form-group">
-                <label>2. O que você achou do nosso mix de produtos (variedade e opções)?</label>
-                <div class="radio-options">
-                    <label class="radio-option"><input type="radio" name="mix_produtos" value="Muito completo" required> Muito completo</label>
-                    <label class="radio-option"><input type="radio" name="mix_produtos" value="Bom"> Bom</label>
-                    <label class="radio-option"><input type="radio" name="mix_produtos" value="Poderia ter mais opções"> Poderia ter mais opções</label>
-                    <label class="radio-option"><input type="radio" name="mix_produtos" value="Pouca variedade"> Pouca variedade</label>
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label>3. Você considera nosso atendimento ágil?</label>
-                <div class="radio-options">
-                    <label class="radio-option"><input type="radio" name="atendimento_agil" value="Sim, sempre rápido" required> Sim, sempre rápido</label>
-                    <label class="radio-option"><input type="radio" name="atendimento_agil" value="Na maioria das vezes"> Na maioria das vezes</label>
-                    <label class="radio-option"><input type="radio" name="atendimento_agil" value="Às vezes demora"> Às vezes demora</label>
-                    <label class="radio-option"><input type="radio" name="atendimento_agil" value="Demora bastante"> Demora bastante</label>
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label>4. O que você achou dos valores dos nossos produtos?</label>
-                <div class="radio-options">
-                    <label class="radio-option"><input type="radio" name="valores_produtos" value="Preço justo" required> Preço justo</label>
-                    <label class="radio-option"><input type="radio" name="valores_produtos" value="Um pouco alto"> Um pouco alto</label>
-                    <label class="radio-option"><input type="radio" name="valores_produtos" value="Muito caro"> Muito caro</label>
-                    <label class="radio-option"><input type="radio" name="valores_produtos" value="Excelente custo-benefício"> Excelente custo-benefício</label>
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label>5. O prazo de entrega foi satisfatório?</label>
-                <div class="radio-options">
-                    <label class="radio-option"><input type="radio" name="prazo_entrega" value="Chegou antes do esperado" required> Chegou antes do esperado</label>
-                    <label class="radio-option"><input type="radio" name="prazo_entrega" value="Chegou no prazo"> Chegou no prazo</label>
-                    <label class="radio-option"><input type="radio" name="prazo_entrega" value="Atrasou um pouco"> Atrasou um pouco</label>
-                    <label class="radio-option"><input type="radio" name="prazo_entrega" value="Atrasou muito"> Atrasou muito</label>
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label>6. Você teria alguma sugestão de melhoria para nossa loja ou atendimento?</label>
-                <textarea name="sugestao_melhoria" placeholder="Digite sua sugestão aqui..."></textarea>
+                <label>Comentários, sugestões ou críticas:</label>
+                <textarea name="comentarios" placeholder="Este campo é opcional. Fique à vontade para compartilhar sua opinião ou sugestões sobre o nosso atendimento." rows="4"></textarea>
             </div>
             
             <button type="submit" class="btn-submit">Enviar Feedback</button>
